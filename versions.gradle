@@ -10,6 +10,8 @@ ext {
     lifecycle_version = "2.6.0-alpha03"
     activity_version = "1.6.0"
     fragment_version = "1.5.4"
+    viewpager_version = "1.0.0"
+    datastore_version = "1.0.0"
 
     //Retrofit
     retrofit_version = "2.9.0"
