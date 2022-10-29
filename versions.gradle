@@ -1,0 +1,36 @@
+ext {
+    //SDK
+    minSdkVersion = 21
+    compileSdkVersion = 33
+    targetSdkVersion = 33
+
+    //Dependencies
+    core_ktx_version = "1.9.0"
+    material_version = "1.7.0"
+    lifecycle_version = "2.6.0-alpha03"
+    activity_version = "1.6.0"
+    fragment_version = "1.5.4"
+
+    //Retrofit
+    retrofit_version = "2.9.0"
+    converter_gson_version = "2.9.0"
+    okhttp_version = "4.10.0"
+    htpp_logging_interceptor_version = "4.10.0"
+
+    //Navigation Component
+    navigation_version = "2.5.3"
+
+    //Hilt
+    hilt_version = "2.44"
+
+    //Lottie
+    lottie_version = "4.2.2"
+
+    //Room
+    room_version = "2.4.2"
+
+    //Coroutine
+    coroutines_version = "1.6.4"
+    lifecyle_version_ktx_version = "2.5.1"
+
+}
