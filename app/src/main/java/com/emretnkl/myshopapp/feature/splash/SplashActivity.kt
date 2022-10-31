@@ -10,7 +10,6 @@ import com.emretnkl.myshopapp.R
 import com.emretnkl.myshopapp.feature.onboarding.OnboardingActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -52,7 +51,7 @@ class SplashActivity : AppCompatActivity() {
     private fun navigateToMain() {
         lifecycleScope.launch {
             delay(2000)
-            val intent = Intent(this@SplashActivity, OnboardingActivity::class.java)
+            val intent = Intent(this@SplashActivity, MainActivity::class.java)
             startActivity(intent)
             finish()
         }
