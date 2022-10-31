@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">MyShopApp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Onboarding Page-->
+    <string name="on_boarding_skip_button">Skip</string>
+    <string name="on_boarding_start_button">Start</string>
+    <string name="on_boarding_prev_button">Prev</string>
+
 </resources>
