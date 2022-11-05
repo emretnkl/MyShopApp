@@ -2,6 +2,11 @@ package com.emretnkl.myshopapp.data.di
 
 import com.emretnkl.myshopapp.data.interceptor.AuthInterceptor
 import com.emretnkl.myshopapp.data.remote.utils.Constants
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -54,4 +59,11 @@ class RemoteDataModule {
     @Singleton
     fun provideGsonConverterFactory() = GsonConverterFactory.create()
 
+    @Provides
+    @Singleton
+    fun provideFirebaseService() = Firebase.auth
+
+    @Provides
+    @Singleton
+    fun provideFirebaseFireStore() = Firebase.firestore
 }

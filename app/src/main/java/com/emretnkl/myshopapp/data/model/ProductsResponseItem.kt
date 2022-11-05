@@ -19,3 +19,14 @@ data class ProductsResponseItem(
     @SerializedName("rating")
     val rating: Rating?
 )
+
+data class ProductsResponseItemDTO(
+    val id: Int?,
+    val title: String?,
+    val price: Double?,
+    val description: String?,
+    val category: String?,
+    val image: String?,
+    val rating: Rating?,
+    var isOnCart: Boolean = false
+)
