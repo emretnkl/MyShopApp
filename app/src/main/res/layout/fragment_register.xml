@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".feature.register.RegisterFragment">
+
+        <TextView
+            android:id="@+id/tvRegisterTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginVertical="40dp"
+            android:fontFamily="@font/open_sans"
+            android:textStyle="bold"
+            android:textSize="32sp"
+            android:text="REGISTER"/>
+
+        <EditText
+            android:id="@+id/etRegisterUsername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/tvRegisterTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginVertical="24dp"
+            android:layout_marginHorizontal="24dp"
+            android:paddingVertical="8dp"
+            android:paddingHorizontal="8dp"
+            android:background="@drawable/edittext_border"
+            android:fontFamily="@font/open_sans"
+            android:inputType="text"
+            android:hint="Username"
+            />
+
+        <EditText
+            android:id="@+id/etRegisterEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/etRegisterUsername"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginVertical="24dp"
+            android:layout_marginHorizontal="24dp"
+            android:paddingVertical="8dp"
+            android:paddingHorizontal="8dp"
+            android:background="@drawable/edittext_border"
+            android:fontFamily="@font/open_sans"
+            android:inputType="textEmailAddress"
+            android:hint="Email"
+            />
+
+        <EditText
+            android:id="@+id/etRegisterPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/etRegisterEmail"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginVertical="24dp"
+            android:layout_marginHorizontal="24dp"
+            android:paddingVertical="8dp"
+            android:paddingHorizontal="8dp"
+            android:inputType="textPassword"
+            android:background="@drawable/edittext_border"
+            android:fontFamily="@font/open_sans"
+            android:hint="Password"
+            />
+        <EditText
+            android:id="@+id/etRegisterConfirmPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/etRegisterPassword"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginVertical="24dp"
+            android:layout_marginHorizontal="24dp"
+            android:paddingVertical="8dp"
+            android:paddingHorizontal="8dp"
+            android:inputType="textPassword"
+            android:background="@drawable/edittext_border"
+            android:fontFamily="@font/open_sans"
+            android:hint="Confirm Password"
+            />
+
+        <Button
+            android:id="@+id/bttnRegister"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/etRegisterConfirmPassword"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginVertical="24dp"
+            android:fontFamily="@font/open_sans"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text="REGISTER"/>
+
+        <TextView
+            android:id="@+id/tvRegisterToLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/bttnRegister"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginVertical="24dp"
+            android:fontFamily="@font/open_sans"
+            android:textStyle="bold"
+            android:text="Login?"
+            android:textSize="18sp"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

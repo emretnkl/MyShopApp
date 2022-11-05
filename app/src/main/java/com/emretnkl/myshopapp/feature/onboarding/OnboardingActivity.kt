@@ -7,7 +7,7 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.activity.viewModels
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
-import com.emretnkl.myshopapp.MainActivity
+import com.emretnkl.myshopapp.feature.main.MainActivity
 import com.emretnkl.myshopapp.R
 import com.emretnkl.myshopapp.databinding.ActivityOnboardingBinding
 import com.emretnkl.myshopapp.feature.onboarding.adapter.OnboardingAdapter
@@ -65,6 +65,7 @@ class OnboardingActivity : AppCompatActivity() {
 
     private fun navigateToMain() {
         val intent = Intent(this, MainActivity::class.java)
+        intent.putExtra(MainActivity.KEY_NAVIGATE_HOME, false)
         startActivity(intent)
         finish()
     }

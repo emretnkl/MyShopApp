@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.emretnkl.myshopapp.MainActivity
+import com.emretnkl.myshopapp.feature.main.MainActivity
 import com.emretnkl.myshopapp.R
 import com.emretnkl.myshopapp.feature.onboarding.OnboardingActivity
 import dagger.hilt.android.AndroidEntryPoint

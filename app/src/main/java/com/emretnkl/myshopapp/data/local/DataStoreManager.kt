@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.map
 private val Context.dataStore by preferencesDataStore(name = "user_settings")
 class DataStoreManager(context : Context) {
     private object PreferencesKeys {
-        val ONBOARDING_VISIBLE = booleanPreferencesKey("onboarding visible")
+        val ONBOARDING_VISIBLE = booleanPreferencesKey("onboarding_visible")
         val USERNAME = stringPreferencesKey("username")
     }
 
