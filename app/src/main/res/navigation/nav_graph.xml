@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/productsFragment">
+
+    <fragment
+        android:id="@+id/productsFragment"
+        android:name="com.emretnkl.myshopapp.feature.products.ProductsFragment"
+        android:label="fragment_products"
+        tools:layout="@layout/fragment_products" >
+        <action
+            android:id="@+id/action_productsFragment_to_login_graph"
+            app:destination="@id/login_graph" />
+        <action
+            android:id="@+id/action_productsFragment_to_productDetailFragment"
+            app:destination="@id/productDetailFragment" />
+    </fragment>
+
+
+    <include app:graph="@navigation/login_graph" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.emretnkl.myshopapp.feature.search.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.emretnkl.myshopapp.feature.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_login_graph"
+            app:destination="@id/login_graph" />
+    </fragment>
+    <fragment
+        android:id="@+id/productDetailFragment"
+        android:name="com.emretnkl.myshopapp.feature.productDetail.ProductDetailFragment"
+        android:label="fragment_product_detail"
+        tools:layout="@layout/fragment_product_detail" />
+</navigation>

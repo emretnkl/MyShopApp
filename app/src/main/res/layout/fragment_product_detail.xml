@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.emretnkl.myshopapp.feature.productDetail.ProductDetailViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context=".feature.productDetail.ProductDetailFragment">
+
+        <ImageView
+            android:id="@+id/ivProductImage"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="36dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@mipmap/ic_launcher"/>
+        <TextView
+            android:id="@+id/tvProductName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="16dp"
+            android:layout_marginHorizontal="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/ivProductImage"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:fontFamily="@font/open_sans"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:text="Men Jacket" />
+
+        <TextView
+            android:id="@+id/tvProductPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/tvProductName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:fontFamily="@font/open_sans"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:text="100$" />
+
+
+
+        <TextView
+            android:id="@+id/tvProductDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginHorizontal="24dp"
+            app:layout_constraintTop_toBottomOf="@+id/tvProductPrice"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:fontFamily="@font/open_sans"
+            android:textSize="16sp"
+            android:text="This jacket is very good, very very very good. This jacket is very good, very very very good. This jacket is very good, very very very good." />
+
+        <LinearLayout
+            android:id="@+id/llAddToBasket"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/tvProductDescription"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="12dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/bttnAddToBasket"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add To Basket"
+                />
+            <Button
+                android:id="@+id/bttnDecreaseQuantity"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:text="-"
+                android:layout_marginStart="36dp"
+                />
+            <TextView
+                android:id="@+id/tvProductQuantity"
+                android:layout_width="32dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="0"/>
+            <Button
+                android:id="@+id/bttnIncreaseQuantity"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:text="+"
+                />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>
