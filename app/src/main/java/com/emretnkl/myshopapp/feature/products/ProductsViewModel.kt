@@ -1,13 +1,8 @@
 package com.emretnkl.myshopapp.feature.products
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.emretnkl.myshopapp.data.model.ProductsResponseItem
 import com.emretnkl.myshopapp.data.model.ProductsResponseItemDTO
-import com.emretnkl.myshopapp.data.model.Rating
-import com.emretnkl.myshopapp.data.remote.api.ProductsService
 import com.emretnkl.myshopapp.data.remote.utils.DataState
 import com.emretnkl.myshopapp.domain.repository.ProductsRepository
 import com.google.firebase.auth.FirebaseAuth
@@ -33,22 +28,12 @@ class ProductsViewModel @Inject constructor(
     private val _uiEvent = MutableSharedFlow<ProductViewEvent>(replay = 0)
     val uiEvent: SharedFlow<ProductViewEvent> = _uiEvent
 
-    //private var _productsResponse = MutableLiveData<DataState<ArrayList<ProductsResponseItem>>>()
-    //val productsResponse: LiveData<DataState<ArrayList<ProductsResponseItem>>> = _productsResponse
 
     init {
         getProducts()
-        //fetchAllProducts()
+
     }
 
-/*
-    private fun fetchAllProducts() {
-        viewModelScope.launch {
-            productsRepository.getAllProducts().collect {
-                _productsResponse.postValue(it)
-            }
-        }
-    }*/
 
     private fun getProducts() {
         viewModelScope.launch {

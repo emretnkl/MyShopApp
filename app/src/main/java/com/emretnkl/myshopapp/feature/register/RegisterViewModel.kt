@@ -4,15 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.emretnkl.myshopapp.data.local.DataStoreManager
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.SetOptions
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -24,11 +18,6 @@ class RegisterViewModel @Inject constructor(
     private val firebaseAuth: FirebaseAuth,
     private val fireStore: FirebaseFirestore) : ViewModel() {
 
-/*
-    private val _uiEvent = MutableStateFlow<RegisterViewEvent?>(null)
-    val uiEvent: StateFlow<RegisterViewEvent?> = _uiEvent
-
- */
 private val _uiEvent = MutableSharedFlow<RegisterViewEvent>(replay = 0)
     val uiEvent: SharedFlow<RegisterViewEvent> = _uiEvent
 
@@ -43,7 +32,6 @@ private val _uiEvent = MutableSharedFlow<RegisterViewEvent>(replay = 0)
                         password
                     ).addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            //task.result?.user?.uid?.let { setUsername(username, it) }
                             setUsername(username, task.result?.user!!.uid)
 
                         } else {
@@ -57,14 +45,13 @@ private val _uiEvent = MutableSharedFlow<RegisterViewEvent>(replay = 0)
             }
         }
     }
-    //mapOf("username" to username, "uuid" to uuid)
 
 
     private fun setUsername(username: String, uuid: String?) {
         viewModelScope.launch {
             dataStoreManager.setUsername(username)
             val userId = uuid
-            //fireStore.collection("/users").add(mapOf("username" to username, "uuid" to uuid))
+
             fireStore.collection("/users").document(userId.toString()).set("username" to username)
                 .addOnSuccessListener { documentReference ->
                     viewModelScope.launch { _uiEvent.emit(RegisterViewEvent.NavigateToMain) }
@@ -75,40 +62,8 @@ private val _uiEvent = MutableSharedFlow<RegisterViewEvent>(replay = 0)
                 }
         }
     }
-/*
-    fun setUsername(username: String, uuid: String) {
-        viewModelScope.launch {
-            dataStoreManager.setUsername(username)
-            withContext(Dispatchers.IO){
 
-                Firebase.firestore.collection("users")
-                    .document("emre")
-                    .set(hashMapOf("username" to username, "uuid" to uuid))
-                    .addOnSuccessListener { documentReference ->
-                        navigateToMainPage()
-                    }
-                    .addOnFailureListener { error ->
-                        showError(error)
-                    }
-            }
 
-        }
-    }
-
-     fun newSetUserName(userName: String, uuid: String?) {
-        viewModelScope.launch {
-            //dataStoreManager.setUserName(userName)
-            val ref = fireStore.collection("users").document("burak")
-            ref.update("username",FieldValue.arrayUnion("asdasdsad"))
-                .addOnSuccessListener { documentReference ->
-                    viewModelScope.launch { _uiEvent.emit(RegisterViewEvent.NavigateToMain) }
-                }.addOnFailureListener { error ->
-                    viewModelScope.launch {
-                        _uiEvent.emit(RegisterViewEvent.ShowError(error.message.toString()))
-                    }
-                }
-        }
-    }*/
 
     private fun showError(error: java.lang.Exception) {
         viewModelScope.launch {

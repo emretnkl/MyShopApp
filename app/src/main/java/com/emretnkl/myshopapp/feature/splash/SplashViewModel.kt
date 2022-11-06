@@ -24,19 +24,6 @@ class SplashViewModel @Inject constructor(
         checkOnboardingVisibleStatus()
     }
 
-    /* Deprecated version.
-    private fun checkOnboardingVisibleStatus() {
-        viewModelScope.launch {
-            dataStoreManager.getOnboardingVisible.collect{
-                if (it) {
-                    _uiEvent.emit(SplashViewEvent.NavigateToMain)
-                } else {
-                    _uiEvent.emit(SplashViewEvent.NavigateToOnboarding)
-                }
-            }
-        }
-    }
-*/
 
     private fun checkOnboardingVisibleStatus() {
 

@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
-    
+
     <data>
         <variable
             name="dataHolder"
             type="com.emretnkl.myshopapp.data.model.ProductsResponseItemDTO" />
-        
+
         <variable
             name="listener"
-            type="com.emretnkl.myshopapp.feature.products.adapter.OnProductClickListener" />
+            type="com.emretnkl.myshopapp.feature.search.adapter.OnSearchClickListener" />
     </data>
-    
+
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -19,7 +19,7 @@
         android:layout_marginHorizontal="8dp">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardViewProduct"
+            android:id="@+id/cardViewSearch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
@@ -35,7 +35,7 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/ivCardItemProductImage"
+                    android:id="@+id/ivCardItemSearchImage"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -55,7 +55,7 @@
                     android:orientation="vertical"
                     >
                     <TextView
-                        android:id="@+id/tvCardItemProductName"
+                        android:id="@+id/tvCardItemSearchName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingHorizontal="8dp"
@@ -63,9 +63,9 @@
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:textStyle="bold"
+                        android:textColor="@color/app_color_1"
                         android:fontFamily="@font/open_sans"
                         android:textSize="16sp"
-                        android:textColor="@color/app_color_1"
                         android:text="@{dataHolder.title}"
                         tools:text="Men's Hat"
                         android:layout_marginBottom="10dp"
@@ -83,12 +83,12 @@
                             app:srcCompat="@drawable/ic_pricetag" />
 
                         <TextView
-                            android:id="@+id/tvCardItemPrice"
+                            android:id="@+id/tvCardItemSearchPrice"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="16sp"
-                            android:fontFamily="@font/open_sans"
                             android:textColor="@color/app_color_1"
+                            android:fontFamily="@font/open_sans"
                             android:textStyle="normal"
                             android:text="@{dataHolder.price.toString()}"
                             tools:text="30$"
@@ -105,13 +105,13 @@
                             android:layout_marginEnd="10dp"
                             app:srcCompat="@drawable/ic_category" />
                         <TextView
-                            android:id="@+id/tvCardItemProductCategory"
+                            android:id="@+id/tvCardItemSearchCategory"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textStyle="normal"
                             android:fontFamily="@font/open_sans"
-                            android:textColor="@color/app_color_1"
                             android:textSize="14sp"
+                            android:textColor="@color/app_color_1"
                             android:paddingBottom="10dp"
                             android:text="@{dataHolder.category}"
                             tools:text="Men's Fashion"

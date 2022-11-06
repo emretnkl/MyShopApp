@@ -64,6 +64,7 @@ class ProductDetailViewModel @Inject constructor(
     }
 
 
+
 }
 
 sealed class ProductDetailViewEvent {
