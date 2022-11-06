@@ -5,6 +5,7 @@
         <variable
             name="viewModel"
             type="com.emretnkl.myshopapp.feature.productDetail.ProductDetailViewModel" />
+
     </data>
 
     <ScrollView
@@ -32,6 +33,7 @@
             android:id="@+id/tvProductName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/app_color_1"
             android:gravity="center"
             android:layout_marginTop="16dp"
             android:layout_marginHorizontal="16dp"
@@ -53,6 +55,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:fontFamily="@font/open_sans"
+            android:textColor="@color/app_color_1"
             android:textStyle="bold"
             android:textSize="16sp"
             android:text="100$" />
@@ -69,6 +72,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:fontFamily="@font/open_sans"
+            android:textColor="@color/app_color_1"
             android:textSize="16sp"
             android:text="This jacket is very good, very very very good. This jacket is very good, very very very good. This jacket is very good, very very very good." />
 
@@ -80,12 +84,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="12dp"
-            android:layout_marginStart="20dp"
             android:layout_marginBottom="20dp"
             android:orientation="horizontal">
             <Button
                 android:id="@+id/bttnAddToBasket"
                 android:layout_width="wrap_content"
+                android:fontFamily="@font/open_sans"
                 android:layout_height="wrap_content"
                 android:text="Add To Basket"
                 />
@@ -93,21 +97,50 @@
                 android:id="@+id/bttnDecreaseQuantity"
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/open_sans"
                 android:text="-"
-                android:layout_marginStart="36dp"
+                android:layout_marginStart="12dp"
                 />
             <TextView
                 android:id="@+id/tvProductQuantity"
-                android:layout_width="32dp"
+                android:layout_width="24dp"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/open_sans"
+                android:textStyle="bold"
                 android:gravity="center"
-                android:text="0"/>
+                android:textColor="@color/app_color_1"
+                android:text="1"/>
             <Button
                 android:id="@+id/bttnIncreaseQuantity"
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/open_sans"
                 android:text="+"
                 />
+            <LinearLayout
+                android:id="@+id/llTotalPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans"
+                    android:textColor="@color/app_color_1"
+                    android:text="Total Price"/>
+                <TextView
+                    android:id="@+id/tvProductDetailTotalPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans"
+                    android:layout_gravity="center"
+                    android:textColor="@color/app_color_1"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:text="0 $"/>
+            </LinearLayout>
+
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

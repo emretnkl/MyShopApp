@@ -41,6 +41,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/open_sans"
+                    android:textColor="@color/app_color_1"
                     android:textStyle="bold"
                     android:textSize="18sp"
                     android:text="Username : "/>
@@ -50,6 +51,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/open_sans"
+                    android:textColor="@color/app_color_1"
                     android:textStyle="bold"
                     android:textSize="18sp"
                     android:text=" "/>
@@ -64,6 +66,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/open_sans"
+                    android:textColor="@color/app_color_1"
                     android:textStyle="bold"
                     android:textSize="18sp"
                     android:text="Email : "/>
@@ -73,6 +76,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/open_sans"
+                    android:textColor="@color/app_color_1"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:text=" "/>

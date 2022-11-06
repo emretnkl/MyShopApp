@@ -5,56 +5,160 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import com.emretnkl.myshopapp.R
+import com.emretnkl.myshopapp.data.model.ProductsResponseItemDTO
+import com.emretnkl.myshopapp.databinding.FragmentSearchBinding
+import com.emretnkl.myshopapp.feature.search.adapter.OnSearchClickListener
+import com.emretnkl.myshopapp.feature.search.adapter.SearchAdapter
+import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+@AndroidEntryPoint
+class SearchFragment : Fragment(), OnSearchClickListener {
+    private val viewModel by viewModels<SearchViewModel>()
+    private lateinit var binding : FragmentSearchBinding
+    private var navController: NavController? = null
 
-/**
- * A simple [Fragment] subclass.
- * Use the [SearchFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class SearchFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search, container, false)
+        binding = FragmentSearchBinding.inflate(inflater,container,false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment SearchFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            SearchFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        navController = findNavController()
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.svSearchFragment.clearFocus()
+
+        searchProduct()
+
+/*
+        lifecycleScope.launchWhenResumed {
+            launch {
+                viewModel.uiState.collect {
+                    when (it) {
+                        is SearchViewState.Success -> {
+                            binding.rvSearchFragment.adapter =
+                                SearchAdapter(this@SearchFragment).apply {
+                                    submitList(it.search)
+
+                                }
+                        }
+                        is SearchViewState.Loading -> {
+
+                        }
+                    }
                 }
             }
+            launch {
+                viewModel.uiEvent.collect {
+                    when (it) {
+                        is SearchViewEvent.ShowError -> {
+                            Snackbar.make(
+                                binding.root,
+                                it.message.toString(),
+                                Snackbar.LENGTH_SHORT
+                            ).show()
+                        }
+                        is SearchViewEvent.NavigateToDetail -> {
+
+                        }
+                    }
+                }
+            }
+        }
+*/
+        lifecycleScope.launchWhenResumed {
+            launch {
+                viewModel.uiState.collect {
+                    when (it) {
+                        is SearchViewState.Success -> {
+                            if (it.filteredSearch.isEmpty().not()) {
+                                initAdapter(it.filteredSearch)
+                            } else {
+                                initAdapter(it.search)
+                            }
+                        }
+                        is SearchViewState.Loading -> {
+
+                        }
+                    }
+                }
+            }
+            launch {
+                viewModel.uiEvent.collect {
+                    when (it) {
+                        is SearchViewEvent.ShowError -> {
+                            Snackbar.make(
+                                binding.root,
+                                it.message.toString(),
+                                Snackbar.LENGTH_SHORT
+                            ).show()
+                        }
+                        is SearchViewEvent.NavigateToDetail -> {
+
+                        }
+                    }
+                }
+            }
+        }
+        binding.ivSearchFragmentBasketIcon.setOnClickListener {
+            navController?.navigate(R.id.action_searchFragment_to_basketFragment)
+        }
+
+
     }
+
+    private fun initAdapter(search: MutableList<ProductsResponseItemDTO>) {
+        binding.rvSearchFragment.adapter =
+            SearchAdapter(this@SearchFragment).apply {
+                submitList(search)
+            }
+    }
+
+    private fun searchProduct() {
+        binding.svSearchFragment.setOnQueryTextListener(object :
+            androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextChange(newText: String?): Boolean {
+                newText?.let {
+                    if (newText.length > 2) {
+                        viewModel.searchMovie(newText)
+                    } else {
+                        viewModel.searchMovie("")
+                    }
+                }
+                return false
+            }
+
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                query?.let { viewModel.searchMovie(it) }
+                return false
+            }
+        })
+    }
+
+    override fun onSearchClick(search: ProductsResponseItemDTO) {
+        navController?.navigate(R.id.action_searchFragment_to_productDetailFragment,Bundle().apply {
+            putString("productId", search.id.toString())
+            putString("productImage",search.image.toString())
+            putString("productTitle",search.title)
+            putString("productCategory",search.category.toString())
+            putString("productDescription",search.description.toString())
+            putString("productPrice",search.price.toString())
+            putString("productRating",search.rating.toString())
+        })
+    }
+
+
 }

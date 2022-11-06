@@ -1,25 +1,23 @@
 package com.emretnkl.myshopapp.feature.productDetail
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
-import com.emretnkl.myshopapp.R
 import com.emretnkl.myshopapp.databinding.FragmentProductDetailBinding
-import com.emretnkl.myshopapp.feature.products.ProductViewEvent
-import com.emretnkl.myshopapp.feature.products.ProductViewState
-import com.emretnkl.myshopapp.feature.products.adapter.ProductsAdapter
-import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
@@ -27,6 +25,10 @@ class ProductDetailFragment : Fragment() {
     private lateinit var binding : FragmentProductDetailBinding
     private val viewModel by viewModels<ProductDetailViewModel>()
     private lateinit var navController: NavController
+    private lateinit var firebaseAuth : FirebaseAuth
+    private lateinit var firestore: FirebaseFirestore
+    var totalPrice : Float = 0F
+    var quantity = 1
 
 
     override fun onCreateView(
@@ -41,8 +43,12 @@ class ProductDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = findNavController()
+        firebaseAuth = Firebase.auth
+        firestore = Firebase.firestore
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+
+        val userId = firebaseAuth.currentUser?.uid.toString()
 
         val productId = arguments?.getString("productId")?.toInt()
         val productTitle = arguments?.getString("productTitle")
@@ -52,57 +58,54 @@ class ProductDetailFragment : Fragment() {
         val productPrice = arguments?.getString("productPrice")
         val productRating = arguments?.getString("productRating")
 
-        binding.tvProductPrice.text = productPrice + " $"
+
+        binding.tvProductDetailTotalPrice.text = "$productPrice $"
+        binding.tvProductPrice.text = "$productPrice $"
         binding.tvProductDescription.text = productDescription
         binding.tvProductName.text = productTitle
         Glide.with(view.context)
             .load(productImage)
             .into(binding.ivProductImage)
 
-
-/*
-            putString("productId", product.id.toString())
-            putString("productImage",product.image.toString())
-            putString("productTitle",product.title)
-            putString("productCategory",product.category.toString())
-            putString("productDescription",product.description.toString())
-            putString("productPrice",product.price.toString())
-            putString("productRating",product.rating.toString())
-
-
-        lifecycleScope.launchWhenResumed {
-            launch {
-                viewModel.uiState.collect{
-                    when(it){
-                        is ProductDetailViewState.Success -> {
-                            it.products?.let {
-                                binding.tvProductName.text = it.first().title
-                                binding.tvProductDescription.text = it.first().description
-                                binding.tvProductPrice.text = it.first().price.toString()
-
-                            }
-
-                        }
-                        else -> {}
-                    }
-                    }
-
-                    }
-            launch {
-                viewModel.uiEvent.collect{
-                    when(it) {
-                        is ProductDetailViewEvent.ShowError -> {
-                            Snackbar.make(binding.root,it.message.toString(), Snackbar.LENGTH_SHORT).show()
-                        }
-
-                        else -> {}
-                    }
-                }
+        binding.bttnIncreaseQuantity.setOnClickListener {
+            quantity++
+            if (productPrice != null) {
+                totalPrice = quantity * productPrice.toFloat()
             }
-        } */
+            binding.tvProductQuantity.text = quantity.toString()
+            binding.tvProductDetailTotalPrice.text = "$totalPrice $"
+        }
+
+        binding.bttnDecreaseQuantity.setOnClickListener {
+            if (quantity > 1) {
+                quantity--
+            }
+            if (productPrice != null) {
+                totalPrice = quantity * productPrice.toFloat()
+            }
+            binding.tvProductQuantity.text = quantity.toString()
+            binding.tvProductDetailTotalPrice.text = "$totalPrice$"
+        }
+
+
+        binding.bttnAddToBasket.setOnClickListener {
+            Log.d("Emre : ", "ProductDetailFragment : " + quantity)
+            val product = Product(productId.toString(),productImage,productTitle,productPrice,quantity)
+            firestore.collection("users").document(userId).collection("cart").document(productId.toString()).set(product)
+                .addOnSuccessListener {
+                    Toast.makeText(requireContext(),"Product has been added to cart.",Toast.LENGTH_SHORT).show()
+                }
+        }
 
     }
 
 }
+data class Product(
+    val id: String? = null,
+    val image: String? = null,
+    val title: String? = null,
+    val price: String? = null,
+    val quantity: Int? = null
+)
 
 

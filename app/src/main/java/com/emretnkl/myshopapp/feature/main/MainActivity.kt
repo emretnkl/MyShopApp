@@ -2,6 +2,7 @@ package com.emretnkl.myshopapp.feature.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
@@ -48,5 +49,16 @@ class MainActivity : AppCompatActivity() {
             navController.navigate(R.id.login_graph)
         }
         binding.isVisibleBar = isNavigateToProducts
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            if(destination.id == R.id.registerFragment || destination.id == R.id.loginFragment) {
+
+                binding.bottomNavigationView.visibility = View.GONE
+            } else {
+
+                binding.bottomNavigationView.visibility = View.VISIBLE
+            }
+        }
+
     }
 }

@@ -5,24 +5,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.emretnkl.myshopapp.R
-import com.emretnkl.myshopapp.data.model.ProductsResponse
-import com.emretnkl.myshopapp.data.model.ProductsResponseItem
 import com.emretnkl.myshopapp.data.model.ProductsResponseItemDTO
-import com.emretnkl.myshopapp.data.remote.utils.DataState
 import com.emretnkl.myshopapp.databinding.FragmentProductsBinding
 import com.emretnkl.myshopapp.feature.products.adapter.OnProductClickListener
 import com.emretnkl.myshopapp.feature.products.adapter.ProductsAdapter
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 
 @AndroidEntryPoint
@@ -80,6 +74,10 @@ class ProductsFragment : Fragment(), OnProductClickListener {
             }
         }
 
+        binding.ivProductFragmentBasketIcon.setOnClickListener {
+            navController?.navigate(R.id.action_productsFragment_to_basketFragment)
+        }
+
     }
 
     override fun onProductClick(product: ProductsResponseItemDTO) {
@@ -95,11 +93,6 @@ class ProductsFragment : Fragment(), OnProductClickListener {
         })
     }
 
-    /*
-    override fun onProductClick(productsResponseItemDTO: ProductsResponseItemDTO) {
-        viewModel.onProductClick()
-
-    }*/
 
 
 }
