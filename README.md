@@ -17,7 +17,7 @@ Products Screen            | Product Detail Screen               | Search Screen
 :-------------------------:|:-------------------------:|:-------------------------:
 <img src="screenshots/SS7.jpg"/>           |  <img src="screenshots/SS8.jpg"/>              | <img src="screenshots/SS9.jpg"/>  |
 
-Products Screen            |
+Basket Screen            |
 :-------------------------:|
 <img src="screenshots/SS10.jpg"/> 
 
