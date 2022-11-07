@@ -17,9 +17,9 @@ Products Screen            | Product Detail Screen               | Search Screen
 :-------------------------:|:-------------------------:|:-------------------------:
 <img src="screenshots/SS7.jpg"/>           |  <img src="screenshots/SS8.jpg"/>              | <img src="screenshots/SS9.jpg"/>  |
 
-Basket Screen            |
-:-------------------------:|
-<img src="screenshots/SS10.jpg"/> 
+Basket Screen            | Profile Screen               |
+:-------------------------:|:-------------------------:|
+<img src="screenshots/SS10.jpg"/>   <img src="screenshots/SS11.jpg"/>              |
 
 
 ## Tech Stack
